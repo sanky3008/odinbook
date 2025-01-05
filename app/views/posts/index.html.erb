@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="header-buttons">
+    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %><br>
+    <%= link_to "My Profile", user_path(current_user), class: "btn btn-secondary" %><br>
+    <%= link_to "All Users", users_path, class: "btn btn-secondary" %>
+  </div>
+
+  <h1>Posts from People You Follow</h1>
+
+  <div class="posts">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="post-card">
+          <div class="post-header">
+            <h3><%= post.author.email %></h3>
+            <small><%= time_ago_in_words(post.created_at) %> ago</small>
+          </div>
+          <div class="post-content">
+            <%= post.content %>
+          </div>
+          <div class="post-stats">
+            <span class="likes">
+              <i class="fas fa-heart"></i> <%= post.likes %> likes
+            </span>
+            <span class="comments">
+              <i class="fas fa-comment"></i> <%= post.comments.count %> comments
+            </span>
+          </div>
+          <div class="post-actions">
+            <%= link_to "View Full Post", post_path(post), class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No posts to show. Follow some users to see their posts!</p>
+    <% end %>
+  </div>
+</div>
+
