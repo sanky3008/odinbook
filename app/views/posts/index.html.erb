@@ -20,6 +20,7 @@
           <div class="post-content">
             <%= post.content %>
           </div>
+          <%= button_to "Like", like_post_path(post), method: :post, class: "btn btn-primary" %>
           <div class="post-stats">
             <span class="likes">
               <i class="fas fa-heart"></i> <%= post.likes %> likes

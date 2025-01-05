@@ -26,6 +26,12 @@ class PostsController < ApplicationController
     @comments = @post.comments.order(created_at: :desc)
   end
 
+  def like
+    @post = Post.find(params[:id])
+    @post.increment!(:likes)
+    redirect_to request.referer
+  end
+
   private
 
   def post_params
