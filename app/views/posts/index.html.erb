@@ -1,9 +1,11 @@
 <div class="container">
   <div class="header-buttons">
-    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %><br>
     <%= link_to "My Profile", user_path(current_user), class: "btn btn-secondary" %><br>
     <%= link_to "All Users", users_path, class: "btn btn-secondary" %>
   </div>
+
+  <h1>Create a New Post</h1>
+  <%= link_to "New Post", new_post_path, class: "btn btn-primary" %><br>
 
   <h1>Posts from People You Follow</h1>
 
