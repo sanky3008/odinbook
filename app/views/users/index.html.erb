@@ -1,2 +1,27 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<%= link_to "Back to Homepage", root_path, class: "btn btn-secondary" %>
+
+<div class="container">
+  <h2>All Users</h2>
+
+  <div class="user-list mt-4">
+    <% if @users.any? %>
+      <div class="list-group">
+        <% @users.each do |user| %>
+          <%= link_to user.email, user_path(user), class: "list-group-item list-group-item-action" do %>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <%= user.email %>
+              </div>
+              <small class="text-muted">
+                Joined <%= time_ago_in_words(user.created_at) %> ago
+              </small>
+            </div>
+            <br>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No users found.</p>
+    <% end %>
+  </div>
+</div>

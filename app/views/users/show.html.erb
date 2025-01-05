@@ -1,2 +1,85 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= link_to "Back to Homepage", root_path, class: "btn btn-secondary" %>
+
+<div class="container">
+  <div class="profile-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2><%= link_to @user.email, user_path(@user) %></h2>
+      <% if current_user != @user %>
+        <%= button_to "Follow", "#", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    
+    <div class="follow-stats mt-3">
+      <span class="me-3">
+        <strong>Following:</strong> <%= @user.following.count %>
+      </span>
+      <span>
+        <strong>Followers:</strong> <%= @user.followers.count %>
+      </span>
+    </div>
+  </div>
+
+  <div class="posts-section mt-4">
+    <h3>Posts</h3>
+    
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="post-card mb-3">
+          <div class="post-header">
+            <small><%= time_ago_in_words(post.created_at) %> ago</small>
+          </div>
+          
+          <div class="post-content">
+            <%= post.content %>
+          </div>
+
+          <div class="post-footer">
+            <span class="likes">
+              <i class="fas fa-heart"></i> <%= post.likes %> likes
+            </span>
+            <%= link_to "View Comments", post_path(post), class: "btn btn-sm btn-outline-primary ms-2" %>
+          </div>
+          <br>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No posts yet.</p>
+    <% end %>
+  </div>
+
+  <div class="follows-section mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Following</h4>
+        <% if @user.following.any? %>
+          <div class="list-group">
+            <% @user.following.each do |following| %>
+              <%= link_to user_path(following), class: "list-group-item list-group-item-action" do %>
+                <%= following.email %>
+              <% end %>
+              <br>
+            <% end %>
+          </div>
+        <% else %>
+          <p>Not following anyone yet.</p>
+        <% end %>
+      </div>
+
+      <div class="col-md-6">
+        <h4>Followers</h4>
+        <% if @user.followers.any? %>
+          <div class="list-group">
+            <% @user.followers.each do |follower| %>
+              <%= link_to user_path(follower), class: "list-group-item list-group-item-action" do %>
+                <%= follower.email %>
+              <% end %>
+              <br>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No followers yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

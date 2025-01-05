@@ -3,7 +3,7 @@
 <div class="container">
   <div class="post-card">
     <div class="post-header">
-      <h3><%= @post.author.email %></h3>
+      <h3><%= link_to @post.author.email, user_path(@post.author) %></h3>
       <small><%= time_ago_in_words(@post.created_at) %> ago</small>
     </div>
     
@@ -25,7 +25,7 @@
       <% @comments.each do |comment| %>
         <div class="comment-card">
           <div class="comment-header">
-            <strong><%= comment.author.email %></strong>
+            <strong><%= link_to comment.author.email, user_path(comment.author) %></strong>
             <small><%= time_ago_in_words(comment.created_at) %> ago</small>
           </div>
           <div class="comment-content">

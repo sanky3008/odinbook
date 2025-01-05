@@ -14,7 +14,7 @@
       <% @posts.each do |post| %>
         <div class="post-card">
           <div class="post-header">
-            <h3><%= post.author.email %></h3>
+            <h3><%= link_to post.author.email, user_path(post.author) %></h3>
             <small><%= time_ago_in_words(post.created_at) %> ago</small>
           </div>
           <div class="post-content">
